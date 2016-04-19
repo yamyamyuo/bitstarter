@@ -1,11 +1,19 @@
 var express = require('express');
+var fs = require('fs');
+var htmlfile = "index.html";
 
-var app = express();
+var http = require('http');
+
+var app = express(); 
+var server = http.createServer(app);
 
 app.get('/', function(req, res) {
-    res.send('Hello world2!');
+    var html = fs.readFileSync(htmlfile).toString();    
+res.send(html);
 });
 
-app.listen(3000, function(){
-    console.log("Listening on 3000");
+var port = process.env.PORT || 8080;
+
+app.listen(port, function(){
+    console.log("Listening on"+ port);
 });
